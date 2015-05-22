@@ -5,8 +5,7 @@
  */
 package servlet;
 
-import ejb.myBean;
-import ejb.myBeanLocal;
+
 import ejb.myBeanRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,6 +48,7 @@ public class myServlet extends HttpServlet {
             out.println(myBean.getRemoteInfo());
             out.println("!");
             out.println("</h1>");
+            out.println("<form >");
             out.println("</body>");
             out.println("</html>");
         }
