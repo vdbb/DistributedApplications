@@ -6,3 +6,5 @@
 /myProject-ejb/dist/
 /myProject-war/build/
 /myProject-war/dist/
+/SpringApplication/nbproject/private/
+/SpringApplication/build/
