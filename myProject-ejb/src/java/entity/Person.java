@@ -69,7 +69,7 @@ public class Person implements Serializable {
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy="buyer")
     private List<Purchase> purchases;
 
     public Person() {
@@ -135,10 +135,12 @@ public class Person implements Serializable {
 
     public void addPurchase(Purchase p){
         purchases.add(p);
+        p.setBuyer(this);
     }
     
     public void removePurchase(Purchase p){
         purchases.remove(p);
+        p.setBuyer(null);
     }
 
     @Override
