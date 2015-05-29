@@ -7,12 +7,18 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +46,7 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Basic(optional = false)
     @NotNull
@@ -62,20 +69,24 @@ public class Person implements Serializable {
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
+    @OneToMany(mappedBy="person")
+    private List<Purchase> purchases;
 
     public Person() {
+        purchases = new LinkedList<>();
     }
 
     public Person(Integer id) {
         this.id = id;
+        purchases = new LinkedList<>();
     }
 
-    public Person(Integer id, String username, String password, String email, Date birthdate) {
-        this.id = id;
+    public Person(String username, String password, String email, Date birthdate) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.birthdate = birthdate;
+        purchases = new LinkedList<>();
     }
 
     public Integer getId() {
@@ -116,6 +127,18 @@ public class Person implements Serializable {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void addPurchase(Purchase p){
+        purchases.add(p);
+    }
+    
+    public void removePurchase(Purchase p){
+        purchases.remove(p);
     }
 
     @Override

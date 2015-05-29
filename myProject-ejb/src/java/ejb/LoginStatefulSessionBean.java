@@ -50,7 +50,7 @@ public class LoginStatefulSessionBean implements LoginStatefulSessionBeanLocal, 
     @Override
     public void login(String name, String password) {
         
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "FinalAssignment-ejbPU" );
+        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "myProject-ejbPU" );
         EntityManager em = emfactory.createEntityManager();
         
         //use entity manager to retrieve named query

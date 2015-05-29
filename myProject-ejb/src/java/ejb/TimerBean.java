@@ -23,24 +23,26 @@ public class TimerBean {
     
     @Resource
     TimerService ts;
-    
+    Timer timer;
+
     public void startMyTimer() {
         
         //Every hour, every minute, every second
         ScheduleExpression se = new ScheduleExpression().hour("*").minute("*").second("*/10");
-        ts.createCalendarTimer(se);
+        timer = ts.createCalendarTimer(se);
         
     }
     
     @Timeout
     public void myProgTimerMethod() {
-        System.out.println("I'm the called timer method");
+        System.out.println("Programmatic Timeout !");
     }
     
     public void cancelMyTimers() {
         for(Object obj: ts.getTimers()) {
-            Timer timer = (Timer)obj;
-            timer.cancel();
+            Timer t = (Timer)obj;
+            t.cancel();
+            System.out.println("Timer cancelled");
         }
     }
 

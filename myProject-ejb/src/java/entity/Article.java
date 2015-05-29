@@ -1,85 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Brecht
- */
 @Entity
-@Table(name = "article")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
-    @NamedQuery(name = "Article.findById", query = "SELECT a FROM Article a WHERE a.id = :id"),
-    @NamedQuery(name = "Article.findByType", query = "SELECT a FROM Article a WHERE a.type = :type"),
-    @NamedQuery(name = "Article.findByPrice", query = "SELECT a FROM Article a WHERE a.price = :price"),
-    @NamedQuery(name = "Article.findByDescription", query = "SELECT a FROM Article a WHERE a.description = :description")})
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Article implements Serializable {
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Integer id;
+    @ManyToMany
+    protected List<Purchase> purchases;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "type")
-    private String type;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "price")
-    private int price;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "description")
-    private String description;
+    protected int price;
+    @Size(min = 1, max = 255)
+    protected String description;
 
-    public Article() {
+    public Article(){
+        purchases = new LinkedList<>();
     }
-
-    public Article(Integer id) {
-        this.id = id;
-    }
-
-    public Article(Integer id, String type, int price, String description) {
-        this.id = id;
-        this.type = type;
+    
+    public Article(int price, String description) {
         this.price = price;
         this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+        purchases = new LinkedList<>();
     }
 
     public int getPrice() {
@@ -98,6 +60,20 @@ public class Article implements Serializable {
         this.description = description;
     }
 
+    public void addPurchase(Purchase p){
+        purchases.add(p);
+    }
+    
+    public void removePurchase(Purchase p){
+        purchases.remove(p);
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -121,6 +97,14 @@ public class Article implements Serializable {
     @Override
     public String toString() {
         return "ejb.Article[ id=" + id + " ]";
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
 }
