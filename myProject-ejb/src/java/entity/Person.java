@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class Person implements Serializable {
     @NotNull
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
-    private Date birthdate;
+    private LocalDateTime birthdate;
     @OneToMany(mappedBy="buyer")
     private List<Purchase> purchases;
 
@@ -81,7 +82,7 @@ public class Person implements Serializable {
         purchases = new LinkedList<>();
     }
 
-    public Person(String username, String password, String email, Date birthdate) {
+    public Person(String username, String password, String email, LocalDateTime birthdate) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -121,11 +122,11 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Date getBirthdate() {
+    public LocalDateTime getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDateTime birthdate) {
         this.birthdate = birthdate;
     }
 

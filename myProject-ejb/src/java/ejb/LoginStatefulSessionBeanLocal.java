@@ -5,7 +5,7 @@
  */
 package ejb;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.ejb.Local;
 
 /**
@@ -21,7 +21,7 @@ public interface LoginStatefulSessionBeanLocal {
     
     void setEmail(String newEmail);
     
-    void setBirthdate(Date newBirthdate);
+    void setBirthdate(LocalDateTime newBirthdate);
     
     void login(String name, String password);
     

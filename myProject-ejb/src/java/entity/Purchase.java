@@ -1,6 +1,6 @@
 package entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -26,7 +26,7 @@ public class Purchase {
     private int id;
     @Basic(optional = false)
     @NotNull
-    private LocalDate timestamp;
+    private LocalDateTime timestamp;
     @Basic(optional = false)
     @NotNull
     private boolean paid;
@@ -46,7 +46,7 @@ public class Purchase {
         articles = new LinkedList<>();
     }
 
-    public Purchase(LocalDate timestamp) {
+    public Purchase(LocalDateTime timestamp) {
         this.timestamp = timestamp;
         articles = new LinkedList<>();
     }
@@ -59,11 +59,11 @@ public class Purchase {
         this.id = id;
     }
 
-    public LocalDate getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDate timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

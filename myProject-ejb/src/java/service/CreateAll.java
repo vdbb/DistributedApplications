@@ -10,8 +10,8 @@ import enums.RacketVendor;
 import enums.ShoeBrand;
 import enums.TerrainType;
 import java.awt.Color;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,9 +23,9 @@ public class CreateAll {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myProject-ejbPU");
         EntityManager em = emf.createEntityManager();
 
-        Person p = new Person("name", "password", "email", new Date(2015, 1, 1));
-        Purchase purchase1 = new Purchase(LocalDate.now());
-        Purchase purchase2 = new Purchase(LocalDate.now());
+        Person p = new Person("name", "password", "email", LocalDateTime.of(2000, Month.MARCH, 1, 12, 00));
+        Purchase purchase1 = new Purchase(LocalDateTime.now());
+        Purchase purchase2 = new Purchase(LocalDateTime.now());
         Racket r1 = new Racket(RacketVendor.Adidas, 5.50, 10.60, 100, "My first racket");
         Racket r2 = new Racket(RacketVendor.Dunlop, 7, 2, 50, "My second racket");
         Tennisball t = new Tennisball(2, BallType.Gasfilled, 1, "Normal ball");

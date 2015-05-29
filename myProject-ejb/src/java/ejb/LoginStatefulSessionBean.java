@@ -7,7 +7,7 @@ package ejb;
 
 
 import entity.Person;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
@@ -25,7 +25,7 @@ public class LoginStatefulSessionBean implements LoginStatefulSessionBeanLocal, 
 
     String name;
     String email;
-    Date birthdate;
+    LocalDateTime birthdate;
     
     @Override
     public void setName(String newName) {
@@ -43,7 +43,7 @@ public class LoginStatefulSessionBean implements LoginStatefulSessionBeanLocal, 
     }
     
     @Override
-    public void setBirthdate(Date newBirthdate) {
+    public void setBirthdate(LocalDateTime newBirthdate) {
         birthdate = newBirthdate;
     }
 
