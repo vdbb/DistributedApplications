@@ -96,7 +96,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.Article[ id=" + id + " ]";
+        return "ejb.Article[ id=" + id + " ]" + this.getClass();
     }
 
     public Integer getId() {
